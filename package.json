@@ -1,0 +1,25 @@
+{
+  "name": "byte-stream",
+  "version": "1.0.0",
+  "description": "FIFO infinite byte-stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/battlesnake/byte-stream.git"
+  },
+  "author": "Mark K Cowan",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/battlesnake/byte-stream/issues"
+  },
+  "homepage": "https://github.com/battlesnake/byte-stream#readme",
+  "dependencies": {
+    "eventemitter": "github:battlesnake/eventemitter"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
+  }
+}
