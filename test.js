@@ -21,6 +21,31 @@ describe('Byte buffer', () => {
 		expect(bs.read(4).toString()).to.equal('abc ');
 		expect(bs.read(6).toString()).to.equal('12345 ');
 	});
+	it('should split a big block', () => {
+		const bs = new ByteStream();
+		expect(bs.read(0)).to.equal(null);
+		bs.write(Buffer.from('here is a big block'));
+		expect(bs.read(5).toString()).to.equal('here ');
+		expect(bs.read(5).toString()).to.equal('is a ');
+		expect(bs.read(4).toString()).to.equal('big ');
+		expect(bs.read(5, 10).toString()).to.equal('block');
+	});
+	it('should join small blocks', () => {
+		const bs = new ByteStream();
+		expect(bs.read(0)).to.equal(null);
+		bs.write(Buffer.from('small'));
+		bs.write(Buffer.from(' '));
+		bs.write(Buffer.from('block'));
+		expect(bs.read(0, 11).toString()).to.equal('small block');
+	});
+	it('should split and join as needed', () => {
+		const bs = new ByteStream();
+		expect(bs.read(0)).to.equal(null);
+		bs.write(Buffer.from('alpha beta '));
+		bs.write(Buffer.from('gamma'));
+		expect(bs.read(6).toString()).to.equal('alpha ');
+		expect(bs.read(10).toString()).to.equal('beta gamma');
+	});
 	it('should read and write arbitrary-sized data blocks', () => {
 		const bs = new ByteStream();
 		bs.write(Buffer.from('potato'));
